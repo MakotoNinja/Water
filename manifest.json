@@ -3,7 +3,7 @@
 	"language": "python",
 	"author": "MakotoNinja",
 	"description": "A farmware for a custom tool for Farmbot.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"min_os_version_major": 6,
 	"url": "https://raw.githubusercontent.com/MakotoNinja/AudreyII/master/manifest.json",
 	"zip": "https://github.com/MakotoNinja/AudreyII/archive/master.zip",
@@ -25,6 +25,7 @@
 		{"name": "bite_retract", "label": "Bite Retraction Distance (MM)", "value": 100 },
 		{"name": "bite_timeout", "label": "Bite Timeout (Milliseconds to Wait When Biting)", "value": 250 },
 		{"name": "dump_offset", "label": "Where to dump excavated soil: Axis, Distance in MM. i.e X, 150", "value": "None" },
+		{"name": "infill_radius", "label": "Infill Radius", "value": 0},
 		{"name": "plant_stage_id", "label": "Plant Stage Tool ID", "value": 0 }
 	]
 }

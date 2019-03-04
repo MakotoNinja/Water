@@ -32,8 +32,15 @@ def deploy():
 		device.set_servo_angle(SERVO_PIN, PLANT_CLOSE_ANGLE)					# bite down on plant
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
 		bot.set_coordinate(plant['x'], plant['y'])								# move above current plant
-		bot.set_axis_position('z', BED_HEIGHT)									# lower into hole
+		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * NUM_BITES - 1))	# lower into hole
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# drop payload
+		bot.set_axis_position('z', BED_HEIGHT)
+		bot.set_offset(x=50)
+		bot.set_offset(x=50, y=50)
+		bot.set_offset(x=-50, y=50)
+		bot.set_offset(x=-50, y=-50)
+		bot.set_offset(x=50, y=-50)
+		bot.set_offset(x=50, y=0)
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
 
 PIN_LIGHTS = 7
@@ -52,6 +59,7 @@ BITE_ADVANCE = Qualify.integer(PKG, 'bite_advance')
 BITE_RETRACT = Qualify.integer(PKG, 'bite_retract')
 BITE_TIMEOUT = Qualify.integer(PKG, 'bite_timeout')
 DUMP_OFFSET = Qualify.combo(PKG, 'dump_offset')
+INFILL_RADIUS = Qualify.integer(PKG, 'infill_radius')
 PLANT_STAGE_ID = Qualify.integer(PKG, 'plant_stage_id')
 PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
 
