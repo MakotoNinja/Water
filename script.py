@@ -15,11 +15,11 @@ def chomp():
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
 		bot.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))
 		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)
-		device.wait(500)
-		bot.set_axis_position('z', BED_HEIGHT + 100)
+		device.wait(BITE_TIMEOUT)
+		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)
 		bot.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'])
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
-		device.wait(250)
+		device.wait(BITE_TIMEOUT)
 		bot.set_offset_axis_position(DUMP_OFFSET['axis'], 0)
 
 def deploy():
@@ -29,7 +29,7 @@ def deploy():
 		bot.set_offset(0, 0, 0)												# reset offset
 		bot.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'])				# move above plant stage
 		bot.set_axis_position('z', PLANT_STAGE['z'])						# move down to plant stage
-		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)				# bite down on plant
+		device.set_servo_angle(SERVO_PIN, SERVO_PLANT_BITE_ANGLE)			# bite down on plant
 		bot.set_axis_position('z', Z_TRANSLATE)								# move to translate height
 		bot.set_coordinate(plant['x'], plant['y'])							# move above current plant
 		bot.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)	# lower into hole
@@ -43,11 +43,14 @@ PKG = 'Audrey II'
 SERVO_PIN = Qualify.integer(PKG, 'servo_pin')
 SERVO_OPEN_ANGLE = Qualify.integer(PKG, 'servo_open_angle')
 SERVO_CLOSE_ANGLE = Qualify.integer(PKG, 'servo_close_angle')
+SERVO_PLANT_BITE_ANGLE = Qualify.integer(PKG, 'servo_plant_bite_angle')
 PLANT_TYPE = get_config_value(PKG, 'plant_type', str).lower()
 Z_TRANSLATE = Qualify.integer(PKG, 'z_translate')
 BED_HEIGHT = Qualify.integer(PKG, 'bed_height')
 NUM_BITES = Qualify.integer(PKG, 'num_bites')
 BITE_ADVANCE = Qualify.integer(PKG, 'bite_advance')
+BITE_RETRACT = Qualify.integer(PKG, 'bite_retract')
+BITE_TIMEOUT = Qualify.integer(PKG, 'bite_timeout')
 DUMP_OFFSET = Qualify.combo(PKG, 'dump_offset')
 PLANT_STAGE_ID = Qualify.integer(PKG, 'plant_stage_id')
 PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
@@ -72,7 +75,6 @@ if not len(target_plants):
 	device.log('No plants found with name: "{}"'.format(PLANT_TYPE))
 	sys.exit()
 
-#device.log('Target Plants: {}'.format(json.dumps(target_plants)))
 device.write_pin(PIN_LIGHTS, 1, 0)
 
 device.execute(audrey_retrieve_sequence_id)
