@@ -58,13 +58,14 @@ PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
 audrey_retrieve_sequence_id = Qualify.sequence(PKG, 'audrey_retrieve')
 audrey_return_sequence_id = Qualify.sequence(PKG, 'audrey_return')
 device.log('Got all cofigs', 'warn')
+'''
 if len(Qualify.errors):
 	for err in Qualify.errors:
 		device.log(err, 'error', ['toast'])
 	sys.exit()
 else:
 	device.log('No config errors detected')
-'''
+
 all_plants = app.get_plants()
 target_plants = [];
 for plant in all_plants:
