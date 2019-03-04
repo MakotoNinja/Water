@@ -24,7 +24,7 @@ def chomp():
 		device.wait(250)
 		coord.set_offset_axis_position(DUMP_OFFSET['axis'], 0)
 		coord.move_abs();
-'''
+
 def deploy():
 	for plant in target_plants:
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
@@ -37,7 +37,7 @@ def deploy():
 		coord.set_coordinate(plant['x'], plant['y'], move_abs=True)				# move above current plant
 		coord.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)		# lower into hole
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)						# drop payload
-'''
+
 device.log('INIT', 'warn')
 PIN_LIGHTS = 7
 PKG = 'Audrey II'
@@ -57,7 +57,7 @@ PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
 audrey_retrieve_sequence_id = Qualify.sequence(PKG, 'audrey_retrieve')
 audrey_return_sequence_id = Qualify.sequence(PKG, 'audrey_return')
 device.log('Got all cofigs', 'warn')
-'''
+
 if len(Qualify.errors):
 	for err in Qualify.errors:
 		device.log(err, 'error', ['toast'])
@@ -91,6 +91,6 @@ for site in target_plants:
 	coord.move_abs()
 deploy()
 device.execute(audrey_return_sequence_id)
-'''
+
 device.home('all')
 device.write_pin(PIN_LIGHTS, 0, 0)
