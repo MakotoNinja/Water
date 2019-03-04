@@ -13,28 +13,28 @@ def chomp():
 	for i in range(NUM_BITES):
 		device.log('Pass {} of {}'.format(i+1, NUM_BITES))
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
-		coord.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE), move_abs=True)
+		bot.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))
 		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)
 		device.wait(500)
-		coord.set_axis_position('z', BED_HEIGHT + 100, move_abs=True)
-		coord.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'], move_abs=True)
+		bot.set_axis_position('z', BED_HEIGHT + 100)
+		bot.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'])
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
 		device.wait(250)
-		coord.set_offset_axis_position(DUMP_OFFSET['axis'], 0, move_abs=True)
+		bot.set_offset_axis_position(DUMP_OFFSET['axis'], 0)
 
 def deploy():
 	for plant in target_plants:
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
-		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)							# move to translate height
-		coord.set_offset(0, 0, 0, move_abs=True)											# reset offset
-		coord.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'], move_abs=True)				# move above plant stage
-		coord.set_axis_position('z', PLANT_STAGE['z'], move_abs=True)						# move down to plant stage
-		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)								# bite down on plant
-		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)							# move to translate height
-		coord.set_coordinate(plant['x'], plant['y'], move_abs=True)							# move above current plant
-		coord.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES, move_abs=True)	# lower into hole
-		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)									# drop payload
-		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)							# move to translate height
+		bot.set_axis_position('z', Z_TRANSLATE)								# move to translate height
+		bot.set_offset(0, 0, 0)												# reset offset
+		bot.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'])				# move above plant stage
+		bot.set_axis_position('z', PLANT_STAGE['z'])						# move down to plant stage
+		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)				# bite down on plant
+		bot.set_axis_position('z', Z_TRANSLATE)								# move to translate height
+		bot.set_coordinate(plant['x'], plant['y'])							# move above current plant
+		bot.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)	# lower into hole
+		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)					# drop payload
+		bot.set_axis_position('z', Z_TRANSLATE)								# move to translate height
 		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)
 
 PIN_LIGHTS = 7
@@ -76,14 +76,14 @@ if not len(target_plants):
 device.write_pin(PIN_LIGHTS, 1, 0)
 
 device.execute(audrey_retrieve_sequence_id)
-coord = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
-coord.move_abs()
+bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
+bot.move_abs()
 for site in target_plants:
-	coord.set_coordinate(site['x'], site['y'], Z_TRANSLATE)
-	coord.move_abs()
+	bot.set_coordinate(site['x'], site['y'], Z_TRANSLATE)
+	bot.move_abs()
 	chomp()
-	coord.set_axis_position('z', Z_TRANSLATE)
-	coord.move_abs()
+	bot.set_axis_position('z', Z_TRANSLATE)
+	bot.move_abs()
 
 deploy()
 device.execute(audrey_return_sequence_id)
