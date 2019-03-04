@@ -34,6 +34,8 @@ def deploy():
 		coord.set_coordinate(plant['x'], plant['y'], move_abs=True)							# move above current plant
 		coord.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES, move_abs=True)	# lower into hole
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)									# drop payload
+		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)							# move to translate height
+		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)
 
 PIN_LIGHTS = 7
 PKG = 'Audrey II'
