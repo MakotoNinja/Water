@@ -7,7 +7,7 @@
 import os, sys, json, Qualify
 from random import randint
 from farmware_tools import device, app, get_config_value
-#from Coordinate import Coordinate
+from Coordinate import Coordinate
 
 def chomp():
 	for i in range(NUM_BITES):
