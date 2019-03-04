@@ -4,7 +4,7 @@
  ' A farmware for a custom tool for Farmbot
 '''
 
-import os, sys, json#, Qualify
+import os, sys, json, Qualify
 from random import randint
 from farmware_tools import device, app, get_config_value
 #from Coordinate import Coordinate
@@ -42,7 +42,6 @@ device.log('INIT', 'warn')
 PIN_LIGHTS = 7
 PKG = 'Audrey II'
 
-input_errors = []
 SERVO_PIN = Qualify.integer(PKG, 'servo_pin')
 SERVO_OPEN_ANGLE = Qualify.integer(PKG, 'servo_open_angle')
 SERVO_CLOSE_ANGLE = Qualify.integer(PKG, 'servo_close_angle')
