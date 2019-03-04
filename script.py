@@ -11,6 +11,7 @@ from Coordinate import Coordinate
 
 def chomp():
 	for i in range(NUM_BITES):
+		device.log('Pass {} of {}'.format(i, NUM_BITES), 'warn')
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
 		coord.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))
 		coord.move_abs();
@@ -30,15 +31,23 @@ def deploy():
 	for plant in target_plants:
 		device.log(json.dumps(plant))
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
-		device.log('About to set Z to translate height.', 'warn')
-		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)								# move to translate height
-		coord.set_offset(0, 0, 0, move_abs=True)								# reset offset
-		coord.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'], move_abs=True)	# move above plant stage
-		coord.set_axis_position('z', PLANT_STAGE['z'], move_abs=True)			# move down to plant stage
-		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)					# bite down on plant
+		device.log('set Z to translate height.', 'warn')
 		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)				# move to translate height
+		device.log('reset offset.', 'warn')
+		coord.set_offset(0, 0, 0, move_abs=True)								# reset offset
+		device.log('go to plant stage.', 'warn')
+		coord.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'], move_abs=True)	# move above plant stage
+		device.log('move down to plant.', 'warn')
+		coord.set_axis_position('z', PLANT_STAGE['z'], move_abs=True)			# move down to plant stage
+		device.log('pinch plant.', 'warn')
+		device.set_servo_angle(SERVO_PIN, SERVO_CLOSE_ANGLE)					# bite down on plant
+		device.log('move to translate height.', 'warn')
+		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)				# move to translate height
+		device.log('move to plant area.', 'warn')
 		coord.set_coordinate(plant['x'], plant['y'], move_abs=True)				# move above current plant
+		device.log('lower into hole.', 'warn')
 		coord.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)		# lower into hole
+		device.log('drop payload.', 'warn')
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)						# drop payload
 
 PIN_LIGHTS = 7
@@ -85,8 +94,6 @@ coord.move_abs()
 for site in target_plants:
 	coord.set_coordinate(site['x'], site['y'], Z_TRANSLATE)
 	coord.move_abs()
-	#coord.set_axis_position('z', BED_HEIGHT)
-	#coord.move_abs()
 	chomp()
 	coord.set_axis_position('z', Z_TRANSLATE)
 	coord.move_abs()
