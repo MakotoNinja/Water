@@ -26,9 +26,12 @@ def chomp():
 		coord.move_abs();
 
 def deploy():
+	device.log('before loop...', 'warn')
 	for plant in target_plants:
+		device.log(json.dumps(plant))
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)
-		coord.set_axis_position('z', Z_TRANSLATE)								# move to translate height
+		device.log('About to set Z to translate height.', 'warn')
+		coord.set_axis_position('z', Z_TRANSLATE, move_abs=True)								# move to translate height
 		coord.set_offset(0, 0, 0, move_abs=True)								# reset offset
 		coord.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'], move_abs=True)	# move above plant stage
 		coord.set_axis_position('z', PLANT_STAGE['z'], move_abs=True)			# move down to plant stage
