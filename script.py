@@ -26,10 +26,10 @@ def deploy():
 	for plant in target_plants:
 		device.set_servo_angle(SERVO_PIN, PLANT_OPEN_ANGLE)						# open mouth
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
-		bot.set_offset(0, 0, 0)													# reset offset if any
+		bot.set_offset(0, 0, 0, move_abs=False)									# reset offset if any
 		bot.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'])					# move above plant stage
 		bot.set_axis_position('z', PLANT_STAGE['z'])							# move down to plant stage
-		device.set_servo_angle(SERVO_PIN, PLANT_BITE_ANGLE)						# bite down on plant
+		device.set_servo_angle(SERVO_PIN, PLANT_CLOSE_ANGLE)					# bite down on plant
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
 		bot.set_coordinate(plant['x'], plant['y'])								# move above current plant
 		bot.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)		# lower into hole
