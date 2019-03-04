@@ -40,18 +40,7 @@ def deploy():
 		bot.set_coordinate(plant['x'], plant['y'])									# move above current plant
 		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * (NUM_BITES - 2))	# lower into hole
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)							# drop payload
-		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)
-		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)
-		bot.set_offset(x=INFILL_RADIUS)
-		bot.set_axis_position('z', BED_HEIGHT)
-		for i in range(NUM_BITES):
-			r = INFILL_RADIUS-(i*BITE_ADVANCE)
-			bot.set_offset(x=r, y=r)
-			bot.set_offset(x=-r, y=r)
-			bot.set_offset(x=-r, y=-r)
-			bot.set_offset(x=r, y=-r)
-			bot.set_offset(x=r, y=0)
-		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
+		bot.set_axis_position('z', Z_TRANSLATE)										# move to translate height
 
 PIN_LIGHTS = 7
 PKG = 'Audrey II'
@@ -70,7 +59,6 @@ BITE_ADVANCE = Qualify.integer(PKG, 'bite_advance')
 BITE_RETRACT = Qualify.integer(PKG, 'bite_retract')
 BITE_TIMEOUT = Qualify.integer(PKG, 'bite_timeout')
 DUMP_OFFSET = Qualify.combo(PKG, 'dump_offset')
-INFILL_RADIUS = Qualify.integer(PKG, 'infill_radius')
 PLANT_STAGE_ID = Qualify.integer(PKG, 'plant_stage_id')
 PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
 
