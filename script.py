@@ -32,7 +32,7 @@ def deploy():
 		device.set_servo_angle(SERVO_PIN, PLANT_CLOSE_ANGLE)					# bite down on plant
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
 		bot.set_coordinate(plant['x'], plant['y'])								# move above current plant
-		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * NUM_BITES - 1))	# lower into hole
+		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * NUM_BITES - 2))	# lower into hole
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# drop payload
 		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)
 		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)
