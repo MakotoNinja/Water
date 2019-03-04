@@ -15,7 +15,7 @@ class Coordinate:
 	'''
 	def set_axis_position(self, axis, pos, move_abs=False):
 		self.coordinate_node['args'][axis] = pos
-		if move:
+		if move_abs:
 			self.move_abs()
 
 	def get_coordinate(self):
@@ -28,7 +28,7 @@ class Coordinate:
 			self.coordinate_node['args']['y'] = y
 		if z:
 			self.coordinate_node['args']['z'] = z
-		if move:
+		if move_abs:
 			self.move_abs()
 
 	def get_node(self):
@@ -39,7 +39,7 @@ class Coordinate:
 
 	def set_offset_axis_position(self=None, axis, pos, move_abs=False):
 		self.offset_node['args'][axis] = pos
-		if move:
+		if move_abs:
 			self.move_abs()
 
 	def get_offset(self):
@@ -52,7 +52,7 @@ class Coordinate:
 			self.offset_node['args']['y'] = y
 		if z:
 			self.offset_node['args']['z'] = z
-		if move:
+		if move_abs:
 			self.move_abs()
 
 	def get_offset_node(self):
