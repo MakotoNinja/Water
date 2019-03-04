@@ -38,7 +38,6 @@ def deploy():
 		coord.set_axis_position('z', BED_HEIGHT - BITE_ADVANCE * NUM_BITES)		# lower into hole
 		device.set_servo_angle(SERVO_PIN, SERVO_OPEN_ANGLE)						# drop payload
 
-device.log('INIT', 'warn')
 PIN_LIGHTS = 7
 PKG = 'Audrey II'
 
@@ -56,7 +55,6 @@ PLANT_STAGE = Qualify.get_tool(PLANT_STAGE_ID)
 
 audrey_retrieve_sequence_id = Qualify.sequence(PKG, 'audrey_retrieve')
 audrey_return_sequence_id = Qualify.sequence(PKG, 'audrey_return')
-device.log('Got all cofigs', 'warn')
 
 if len(Qualify.errors):
 	for err in Qualify.errors:
@@ -89,6 +87,7 @@ for site in target_plants:
 	chomp()
 	coord.set_axis_position('z', Z_TRANSLATE)
 	coord.move_abs()
+device.log('Deploying...', 'warn')
 deploy()
 device.execute(audrey_return_sequence_id)
 
