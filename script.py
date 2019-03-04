@@ -35,12 +35,12 @@ def deploy():
 		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * NUM_BITES - 1))	# lower into hole
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# drop payload
 		bot.set_axis_position('z', BED_HEIGHT)
-		bot.set_offset(x=50)
-		bot.set_offset(x=50, y=50)
-		bot.set_offset(x=-50, y=50)
-		bot.set_offset(x=-50, y=-50)
-		bot.set_offset(x=50, y=-50)
-		bot.set_offset(x=50, y=0)
+		bot.set_offset(x=INFILL_RADIUS)
+		bot.set_offset(x=INFILL_RADIUS, y=INFILL_RADIUS)
+		bot.set_offset(x=-INFILL_RADIUS, y=INFILL_RADIUS)
+		bot.set_offset(x=-INFILL_RADIUS, y=-INFILL_RADIUS)
+		bot.set_offset(x=INFILL_RADIUS, y=-INFILL_RADIUS)
+		bot.set_offset(x=INFILL_RADIUS, y=0)
 		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
 
 PIN_LIGHTS = 7
