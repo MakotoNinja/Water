@@ -9,8 +9,8 @@ from random import randint
 from farmware_tools import device, app, get_config_value
 from Coordinate import Coordinate
 
-def bite():
-	for i in range(3):
+def chew():
+	for i in range(NUM_CHEWS):
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)
 		device.wait(100)
 		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)
@@ -19,27 +19,27 @@ def bite():
 def chomp():
 	for i in range(NUM_BITES):
 		device.log('Pass {} of {}'.format(i+1, NUM_BITES))
-		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# open mouth
-		bot.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))				# move down to bed
-		bite()																	# bite!
-		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)					# retract from hole
-		bot.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'])	# offset to dump soil
-		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# dump soil
-		device.wait(BITE_TIMEOUT)												# give time for dump to finish
-		bot.set_offset_axis_position(DUMP_OFFSET['axis'], 0)					# reposition over hole
+		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)							# open mouth
+		bot.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))					# move down to bed
+		chew()																		# chew!
+		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)						# retract from hole
+		bot.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'])		# offset to dump soil
+		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)							# dump soil
+		device.wait(BITE_TIMEOUT)													# give time for dump to finish
+		bot.set_offset_axis_position(DUMP_OFFSET['axis'], 0)						# reposition over hole
 
 def deploy():
 	for plant in target_plants:
-		device.set_servo_angle(SERVO_PIN, PLANT_OPEN_ANGLE)						# open mouth
-		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
-		bot.set_offset(0, 0, 0, move_abs=False)									# reset offset if any
-		bot.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'])					# move above plant stage
-		bot.set_axis_position('z', PLANT_STAGE['z'])							# move down to plant stage
-		device.set_servo_angle(SERVO_PIN, PLANT_CLOSE_ANGLE)					# bite down on plant
-		bot.set_axis_position('z', Z_TRANSLATE)									# move to translate height
-		bot.set_coordinate(plant['x'], plant['y'])								# move above current plant
-		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * NUM_BITES - 2))	# lower into hole
-		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# drop payload
+		device.set_servo_angle(SERVO_PIN, PLANT_OPEN_ANGLE)							# open mouth
+		bot.set_axis_position('z', Z_TRANSLATE)										# move to translate height
+		bot.set_offset(0, 0, 0, move_abs=False)										# reset offset if any
+		bot.set_coordinate(PLANT_STAGE['x'], PLANT_STAGE['y'])						# move above plant stage
+		bot.set_axis_position('z', PLANT_STAGE['z'])								# move down to plant stage
+		device.set_servo_angle(SERVO_PIN, PLANT_CLOSE_ANGLE)						# bite down on plant
+		bot.set_axis_position('z', Z_TRANSLATE)										# move to translate height
+		bot.set_coordinate(plant['x'], plant['y'])									# move above current plant
+		bot.set_axis_position('z', BED_HEIGHT - (BITE_ADVANCE * (NUM_BITES - 2))	# lower into hole
+		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)							# drop payload
 		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)
 		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)
 		bot.set_offset(x=INFILL_RADIUS)
@@ -64,6 +64,7 @@ PLANT_CLOSE_ANGLE = Qualify.integer(PKG, 'plant_close_angle')
 PLANT_TYPE = get_config_value(PKG, 'plant_type', str).lower()
 Z_TRANSLATE = Qualify.integer(PKG, 'z_translate')
 BED_HEIGHT = Qualify.integer(PKG, 'bed_height')
+NUM_CHEWS = Qualify.integer(PKG, 'num_chews')
 NUM_BITES = Qualify.integer(PKG, 'num_bites')
 BITE_ADVANCE = Qualify.integer(PKG, 'bite_advance')
 BITE_RETRACT = Qualify.integer(PKG, 'bite_retract')
