@@ -49,5 +49,4 @@ def get_tool(id):
 	for tool in tools:
 		if tool['tool_id'] == id:
 			 return tool
-		 else:
-			 return None
+	return None
