@@ -13,19 +13,23 @@ class Coordinate:
 	 ' @axis - str - can only be 'x', 'y' or 'z'
 	 ' @pos  - int - number in millimeters to position axis
 	'''
-	def set_axis_position(self, axis, pos):
+	def set_axis_position(self, axis, pos, move_abs=False):
 		self.coordinate_node['args'][axis] = pos
+		if move:
+			self.move_abs()
 
 	def get_coordinate(self):
 		return self.coordinate_node['args']
 
-	def set_coordinate(self, x=None, y=None, z=None):
+	def set_coordinate(self, x=None, y=None, z=None, move_abs=False):
 		if x:
 			self.coordinate_node['args']['x'] = x
 		if y:
 			self.coordinate_node['args']['y'] = y
 		if z:
 			self.coordinate_node['args']['z'] = z
+		if move:
+			self.move_abs()
 
 	def get_node(self):
 		return self.coordinate_node
@@ -33,19 +37,23 @@ class Coordinate:
 	def get_offset_axis_position(self, axis):
 		return self.offset_node['args'][axis]
 
-	def set_offset_axis_position(self, axis, pos):
+	def set_offset_axis_position(self, axis, pos, move_abs=False):
 		self.offset_node['args'][axis] = pos
+		if move:
+			self.move_abs()
 
 	def get_offset(self):
 		return self.offset_node['args']
 
-	def set_offset(self, x=None, y=None, z=None):
+	def set_offset(self, x=None, y=None, z=None, move_abs=False):
 		if x:
 			self.offset_node['args']['x'] = x
 		if y:
 			self.offset_node['args']['y'] = y
 		if z:
 			self.offset_node['args']['z'] = z
+		if move:
+			self.move_abs()
 
 	def get_offset_node(self):
 		return self.offset_node

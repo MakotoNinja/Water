@@ -43,3 +43,11 @@ def sequence(PKG, input_name):
 		except:
 			input_errors.append('Failed to find sequence ID for {}'.format(seq_name))
 	return None
+
+def get_tool(id):
+	tools = app.get_toolslots()
+	for tool in tools:
+		if tool['tool_id'] == id:
+			 return tool
+		 else:
+			 return None

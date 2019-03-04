@@ -21,6 +21,7 @@
 		{"name": "bed_height", "label": "Garden Bed Height", "value": 0 },
 		{"name": "num_bites", "label": "Number of Bites to take", "value": 5 },
 		{"name": "bite_advance", "label": "Depth Increment Per Bite (MM)", "value": 10 },
-		{"name": "dump_offset", "label": "Where to dump excavated soil: Axis, Distance in MM. i.e X, 150", "value": "None" }
+		{"name": "dump_offset", "label": "Where to dump excavated soil: Axis, Distance in MM. i.e X, 150", "value": "None" },
+		{"name": "plant_stage_id", "label": "Plant Stage Tool ID", "value": 0 }
 	]
 }
