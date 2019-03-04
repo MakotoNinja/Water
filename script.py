@@ -9,13 +9,19 @@ from random import randint
 from farmware_tools import device, app, get_config_value
 from Coordinate import Coordinate
 
+def bite():
+	for i in range(3):
+		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)
+		device.wait(100)
+		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)
+		device.wait(100)
+
 def chomp():
 	for i in range(NUM_BITES):
 		device.log('Pass {} of {}'.format(i+1, NUM_BITES))
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# open mouth
 		bot.set_axis_position('z', BED_HEIGHT - (i * BITE_ADVANCE))				# move down to bed
-		device.set_servo_angle(SERVO_PIN, HOLE_CLOSE_ANGLE)						# bite!
-		device.wait(BITE_TIMEOUT)												# give time for bite to finish
+		bite()																	# bite!
 		bot.set_axis_position('z', BED_HEIGHT + BITE_RETRACT)					# retract from hole
 		bot.set_offset_axis_position(DUMP_OFFSET['axis'], DUMP_OFFSET['value'])	# offset to dump soil
 		device.set_servo_angle(SERVO_PIN, HOLE_OPEN_ANGLE)						# dump soil
