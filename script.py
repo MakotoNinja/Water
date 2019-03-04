@@ -41,9 +41,10 @@ PIN_LIGHTS = 7
 PKG = 'Audrey II'
 
 SERVO_PIN = Qualify.integer(PKG, 'servo_pin')
-SERVO_OPEN_ANGLE = Qualify.integer(PKG, 'servo_open_angle')
-SERVO_CLOSE_ANGLE = Qualify.integer(PKG, 'servo_close_angle')
-SERVO_PLANT_BITE_ANGLE = Qualify.integer(PKG, 'servo_plant_bite_angle')
+HOLE_OPEN_ANGLE = Qualify.integer(PKG, 'hole_open_angle')
+HOLE_CLOSE_ANGLE = Qualify.integer(PKG, 'hole_close_angle')
+PLANT_OPEN_ANGLE = Qualify.integer(PKG, 'plant_open_angle')
+PLANT_CLOSE_ANGLE = Qualify.integer(PKG, 'plant_close_angle')
 PLANT_TYPE = get_config_value(PKG, 'plant_type', str).lower()
 Z_TRANSLATE = Qualify.integer(PKG, 'z_translate')
 BED_HEIGHT = Qualify.integer(PKG, 'bed_height')
