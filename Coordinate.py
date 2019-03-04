@@ -37,7 +37,7 @@ class Coordinate:
 	def get_offset_axis_position(self, axis):
 		return self.offset_node['args'][axis]
 
-	def set_offset_axis_position(self=None, axis, pos, move_abs=False):
+	def set_offset_axis_position(self, axis, pos, move_abs=False):
 		self.offset_node['args'][axis] = pos
 		if move_abs:
 			self.move_abs()
