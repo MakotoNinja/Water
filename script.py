@@ -40,17 +40,11 @@ else :
 
 device.write_pin(PIN_LIGHTS, 1, 0)
 
-device.execute(tool_water_retrieve_sequence_id)
+#device.execute(tool_water_retrieve_sequence_id)
 bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
 bot.move_abs()
-for site in target_plants:
-	bot.set_coordinate(site['x'], site['y'], Z_TRANSLATE)
-	bot.move_abs()
-	chomp()
-	bot.set_axis_position('z', Z_TRANSLATE)
-	bot.move_abs()
 
-device.execute(tool_water_return_sequence_id)
+#device.execute(tool_water_return_sequence_id)
 
 device.home('all')
 device.write_pin(PIN_LIGHTS, 0, 0)
