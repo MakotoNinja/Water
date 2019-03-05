@@ -25,10 +25,11 @@ if len(Qualify.errors):
 	sys.exit()
 else:
 	device.log('No config errors detected')
-'''
+
 device.log('PLANT_TYPES: {}'.format(json.dumps(PLANT_TYPES)))
 all_plants = app.get_plants()
 target_plants = [];
+'''
 for plant in all_plants:
 	plant_name = ''.join(plant['name'].split()).lower()
 	device.log('plant_name: {}, PLANT_TYPES: {}'.format(plant_name, json.dumps(PLANT_TYPES))
