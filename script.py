@@ -12,7 +12,7 @@ from Coordinate import Coordinate
 PIN_LIGHTS = 7
 PKG = 'Water Plants'
 
-PLANT_TYPE = get_config_value(PKG, 'plant_type', str).lower()
+PLANT_TYPES = Qualify.get_csv(PKG, 'plant_types')
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
 
@@ -29,14 +29,16 @@ else:
 all_plants = app.get_plants()
 target_plants = [];
 for plant in all_plants:
-	if plant['name'].lower() == PLANT_TYPE:
+	plant_name = ''.join(plant['name'].split()).lower()
+	device.log('plant_name: {}, PLANT_TYPES: {}'.format(plant_name, json.dumps(PLANT_TYPES))
+	if plant_name in PLANT_TYPES:
 		target_plants.append(plant)
 
-if not len(target_plants):
+if len(target_plants):
+	print(json.dumps(target_plants))
+else :
 	device.log('No plants found with name: "{}"'.format(PLANT_TYPE))
 	sys.exit()
-else :
-	print(json.dumps(target_plants))
 
 device.write_pin(PIN_LIGHTS, 1, 0)
 

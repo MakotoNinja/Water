@@ -44,6 +44,10 @@ def sequence(PKG, input_name):
 			input_errors.append('Failed to find sequence ID for {}'.format(seq_name))
 	return None
 
+def get_csv(PKG, input_name):
+	string = get_config_value(PKG, input_name, str)
+	return ''.join(string.split()).lower().split(',')
+
 def get_tool(id):
 	tools = app.get_toolslots()
 	for tool in tools:
