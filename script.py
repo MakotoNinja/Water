@@ -12,7 +12,7 @@ from Coordinate import Coordinate
 PIN_LIGHTS = 7
 PKG = 'Water Plants'
 
-PLANT_TYPES = Qualify.split_comma_sep(PKG, 'plant_types');
+PLANT_TYPE = get_config_value(PKG, 'plant_type', str)
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
 
@@ -36,13 +36,13 @@ if not len(target_plants):
 	device.log('No plants found with name: "{}"'.format(PLANT_TYPE))
 	sys.exit()
 else :
-	print target_plants
+	print(json.dumps(target_plants))
 
 device.write_pin(PIN_LIGHTS, 1, 0)
 
 #device.execute(tool_water_retrieve_sequence_id)
-bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
-bot.move_abs()
+#bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
+#bot.move_abs()
 
 #device.execute(tool_water_return_sequence_id)
 

@@ -3,7 +3,7 @@
 	"language": "python",
 	"author": "MakotoNinja",
 	"description": "Farmware for watering plants with Farrmbot.",
-	"version": "1.0.2",
+	"version": "1.0.1",
 	"min_os_version_major": 6,
 	"url": "https://raw.githubusercontent.com/MakotoNinja/water-plants/master/manifest.json",
 	"zip": "https://github.com/MakotoNinja/water-plants/archive/master.zip",
@@ -12,7 +12,7 @@
 	"config": [
 		{"name": "tool_water_retrieve", "label": "Water Tool Retreival Sequence Name", "value": "None" },
 		{"name": "tool_water_return", "label": "Water Tool Return Sequence Name", "value": "None" },
-		{"name": "plant_types", "label": "Target Plant Name(s) - Comma Separated", "value": "None" },
+		{"name": "plant_type", "label": "Target Plant Name", "value": "None" },
 		{"name": "translate_height", "label": "Z Height When Translating", "value": 0 }
 	]
 }
