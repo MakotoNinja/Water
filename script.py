@@ -16,10 +16,10 @@ PLANT_TYPES = Qualify.get_csv(PKG, 'plant_types')
 device.log('got plant types')
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
-'''
+
 tool_water_retrieve_sequence_id = Qualify.sequence(PKG, 'tool_water_retrieve')
 tool_water_return_sequence_id = Qualify.sequence(PKG, 'tool_water_return')
-
+'''
 if len(Qualify.errors):
 	for err in Qualify.errors:
 		device.log(err, 'error', ['toast'])

@@ -3,7 +3,7 @@
 	"language": "python",
 	"author": "MakotoNinja",
 	"description": "Farmware for watering plants with Farrmbot.",
-	"version": "1.0.3",
+	"version": "1.0.1",
 	"min_os_version_major": 6,
 	"url": "https://raw.githubusercontent.com/MakotoNinja/water-plants/master/manifest.json",
 	"zip": "https://github.com/MakotoNinja/water-plants/archive/master.zip",
