@@ -12,7 +12,7 @@ from Coordinate import Coordinate
 PIN_LIGHTS = 7
 PKG = 'Water Plants'
 
-PLANT_TYPE = get_config_value(PKG, 'plant_type', str)
+PLANT_TYPE = get_config_value(PKG, 'plant_type', str).lower()
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
 
@@ -29,7 +29,7 @@ else:
 all_plants = app.get_plants()
 target_plants = [];
 for plant in all_plants:
-	if plant['name'].lower() in PLANT_TYPES:
+	if plant['name'].lower() == PLANT_TYPE:
 		target_plants.append(plant)
 
 if not len(target_plants):
