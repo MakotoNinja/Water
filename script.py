@@ -31,12 +31,13 @@ all_plants = app.get_plants()
 target_plants = [];
 for plant in all_plants:
 	plant_name = ''.join(plant['name'].split()).lower()
-	device.log('{} <> {}'.format(plant_name, json.dumps(PLANT_TYPES)))
+	#device.log('{} <> {}'.format(plant_name, json.dumps(PLANT_TYPES)))
 	if plant_name in PLANT_TYPES:
 		target_plants.append(plant)
-print('Target Plants: {}'.format(json.dumps(target_plants)))
+
+device.log('Target Plants: {}'.format(json.dumps(target_plants)))
 if len(target_plants):
-	print('Target Plants: {}'.format(json.dumps(target_plants)))
+	device.log('Target Plants: {}'.format(json.dumps(target_plants)))
 else :
 	device.log('No plants found with name: "{}"'.format(json.dumps(PLANT_TYPES)))
 	sys.exit()
