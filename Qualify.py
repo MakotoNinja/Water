@@ -46,7 +46,6 @@ def sequence(PKG, input_name):
 
 def get_csv(PKG, input_name):
 	string = get_config_value(PKG, input_name, str)
-	device.log('String: {}'.format(string))
 	return ''.join(string.split()).lower().split(',')
 
 def get_tool(id):

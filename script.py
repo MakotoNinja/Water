@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
- ' A farmware for a custom tool for Farmbot
+ ' A plant watering Farmware
 '''
 
 import os, sys, json, Qualify
@@ -11,22 +11,21 @@ from Coordinate import Coordinate
 
 PIN_LIGHTS = 7
 PKG = 'Water Plants'
-device.log('INIT')
+
 PLANT_TYPES = Qualify.get_csv(PKG, 'plant_types')
-device.log('got plant types')
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
 
 tool_water_retrieve_sequence_id = Qualify.sequence(PKG, 'tool_water_retrieve')
 tool_water_return_sequence_id = Qualify.sequence(PKG, 'tool_water_return')
-'''
+
 if len(Qualify.errors):
 	for err in Qualify.errors:
 		device.log(err, 'error', ['toast'])
 	sys.exit()
 else:
 	device.log('No config errors detected')
-
+'''
 device.log('PLANT_TYPES: {}'.format(json.dumps(PLANT_TYPES)))
 all_plants = app.get_plants()
 target_plants = [];
