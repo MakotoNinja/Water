@@ -28,10 +28,10 @@ else:
 
 device.log('PLANT TYPES: {}'.format(json.dumps(PLANT_TYPES)))
 all_plants = app.get_plants()
-device.log('ALL PLANTS: {}'.format(json.dumps(all_plants)))
 target_plants = [];
 for plant in all_plants:
 	plant_name = ''.join(plant['name'].split()).lower()
+	device.log('{} <> {}'.format(plant_name, json.dumps(PLANT_TYPES)))
 	if plant_name in PLANT_TYPES:
 		target_plants.append(plant)
 print('Target Plants: {}'.format(json.dumps(target_plants)))
