@@ -11,8 +11,9 @@ from Coordinate import Coordinate
 
 PIN_LIGHTS = 7
 PKG = 'Water Plants'
-
+device.log('INIT')
 PLANT_TYPES = Qualify.get_csv(PKG, 'plant_types')
+device.log('got plant types')
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
 
