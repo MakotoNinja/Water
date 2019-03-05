@@ -31,22 +31,22 @@ all_plants = app.get_plants()
 target_plants = [];
 for plant in all_plants:
 	plant_name = ''.join(plant['name'].split()).lower()
-	#device.log('{} <> {}'.format(plant_name, json.dumps(PLANT_TYPES)))
 	if plant_name in PLANT_TYPES:
 		target_plants.append(plant)
 
-device.log('Target Plants: {}'.format(json.dumps(target_plants)))
 if len(target_plants):
-	device.log('Target Plants: {}'.format(json.dumps(target_plants)))
+	device.log('Target Plants: {}'.format(len(target_plants)))
 else :
-	device.log('No plants found with name: "{}"'.format(json.dumps(PLANT_TYPES)))
+	device.log('No plants found with name(s): "{}"'.format(json.dumps(PLANT_TYPES)))
 	sys.exit()
 
 device.write_pin(PIN_LIGHTS, 1, 0)
 
 #device.execute(tool_water_retrieve_sequence_id)
-#bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
-#bot.move_abs()
+bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), TRANSLATE_HMEIGHT)
+bot.move_abs()
+for plant in target_plants:
+	bot.set_coordinate(x=plant['x'], y=plant['y'])
 
 #device.execute(tool_water_return_sequence_id)
 
