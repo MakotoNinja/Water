@@ -16,7 +16,7 @@ PLANT_TYPES = Qualify.get_csv(PKG, 'plant_types')
 device.log('got plant types')
 TRANSLATE_HMEIGHT = Qualify.integer(PKG, 'translate_height')
 WATER_HEIGHT = Qualify.integer(PKG, 'water_height')
-
+'''
 tool_water_retrieve_sequence_id = Qualify.sequence(PKG, 'tool_water_retrieve')
 tool_water_return_sequence_id = Qualify.sequence(PKG, 'tool_water_return')
 
@@ -43,7 +43,7 @@ else :
 	sys.exit()
 
 device.write_pin(PIN_LIGHTS, 1, 0)
-
+'''
 #device.execute(tool_water_retrieve_sequence_id)
 #bot = Coordinate(device.get_current_position('x'), device.get_current_position('y'), Z_TRANSLATE)
 #bot.move_abs()
