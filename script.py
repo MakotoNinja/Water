@@ -35,6 +35,7 @@ for plant in all_plants:
 		target_plants.append(plant)
 
 if len(target_plants):
+	# output target plants
 	device.log('Target Plants: {}'.format(len(target_plants)))
 else :
 	device.log('No plants found with name(s): "{}"'.format(json.dumps(PLANT_TYPES)))
