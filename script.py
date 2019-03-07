@@ -37,7 +37,7 @@ for plant in all_plants:
 if len(target_plants):
 	# output target plants
 	device.log('Num Plants: {}'.format(len(target_plants)))
-	device.log('Target Plants: {}'.format(target_plants))
+	device.log('Target Plants: {}'.format(jason.dumps(target_plants)))
 else :
 	device.log('No plants found with name(s): "{}"'.format(json.dumps(PLANT_TYPES)))
 	sys.exit()
